@@ -6,6 +6,6 @@ node_js:
 before_script:
   - npm install -g noop
 script:
-  - 'npm lint && npm test'
+  - 'npm run lint && npm test'
 notifications:
   email: false
