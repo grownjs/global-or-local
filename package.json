@@ -1,6 +1,6 @@
 {
   "name": "global-or-local",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Load modules from elsewhere!",
   "main": "index.js",
   "author": "Alvaro Cabrera <pateketrueke@gmail.com>",
