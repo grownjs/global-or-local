@@ -6,6 +6,8 @@ node_js:
 before_script:
   - npm install -g noop
 script:
-  - 'npm run lint && npm test'
+  - 'npm run lint && npm run cover'
+after_script:
+  - 'npm run cover:up'
 notifications:
   email: false

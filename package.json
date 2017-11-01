@@ -7,14 +7,18 @@
   "license": "MIT",
   "scripts": {
     "lint": "eslint index.js",
-    "test": "jasmine-node spec --coffee --noStackTrace --captureExceptions",
+    "test": "npm run lint && jasmine-node spec --coffee --noStackTrace --captureExceptions",
+    "cover": "istanbul cover --x '**/spec/**' -- jasmine-node spec --coffee",
+    "cover:up": "codecov --file=coverage/lcov.info --disable=gcov -e TRAVIS_NODE_VERSION",
     "dev": "npm test -- --verbose --autoTest"
   },
   "devDependencies": {
+    "codecov": "^3.0.0",
     "debug": "^3.1.0",
     "eslint": "^3.5.0",
     "eslint-config-airbnb-base": "^5.0.3",
     "eslint-plugin-import": "^1.14.0",
+    "istanbul": ">=0.4.3",
     "jasmine-node": "2.0.0-beta4"
   }
 }
