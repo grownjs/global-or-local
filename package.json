@@ -1,0 +1,19 @@
+{
+  "name": "global-or-local",
+  "version": "0.0.1",
+  "description": "Load modules from elsewhere!",
+  "main": "index.js",
+  "author": "Alvaro Cabrera <pateketrueke@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint index.js && coffeelint spec",
+    "test": "jasmine-node spec --coffee --noStackTrace --captureExceptions",
+    "dev": "npm test -- --verbose --autoTest"
+  },
+  "devDependencies": {
+    "eslint": "^3.5.0",
+    "eslint-config-airbnb-base": "^5.0.3",
+    "eslint-plugin-import": "^1.14.0",
+    "jasmine-node": "2.0.0-beta4"
+  }
+}
