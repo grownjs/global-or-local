@@ -38,7 +38,7 @@ function _resolveHack(name) {
     _err = e;
 
     // avoid relative files
-    if (name.indexOf('/') > -1) {
+    if (name.charAt('.') === 0 || name.indexOf('/') > -1) {
       throw e;
     }
   }
@@ -72,6 +72,10 @@ function _resolveHack(name) {
 
 module.exports = {
   install(knownModules) {
+    if (typeof knownModules === 'string') {
+      knownModules = Array.prototype.slice.call(arguments);
+    }
+
     if (knownModules && !Array.isArray(knownModules)) {
       throw new Error(`Expect known modules as array, given '${knownModules}'`);
     }
