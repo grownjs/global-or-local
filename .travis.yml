@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+  - 4
+  - 6
+  - 8
+before_script:
+  - npm install -g noop
+script:
+  - 'npm lint && npm test'
+notifications:
+  email: false
