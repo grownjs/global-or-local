@@ -6,7 +6,7 @@
   "author": "Alvaro Cabrera <pateketrueke@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "lint": "eslint index.js && coffeelint spec",
+    "lint": "eslint index.js",
     "test": "jasmine-node spec --coffee --noStackTrace --captureExceptions",
     "dev": "npm test -- --verbose --autoTest"
   },
