@@ -49,7 +49,7 @@ describe 'global-or-local', ->
       catch e
         msg = e.message
 
-      expect(msg).toContain "npm install --save-dev #{__idk__}"
+      expect(msg).toContain "npm install #{__idk__} --save"
 
     it 'resolve locally otherwise', ->
       expect(setupESLint).not.toThrow()
