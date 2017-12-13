@@ -26,6 +26,8 @@ const _resolveOriginal = Module._resolveFilename;
 const _resolved = {};
 
 const _known = [];
+const _knownDev = [];
+const _knownOptional = [];
 
 function _resolveHack(name) {
   let _err;
@@ -63,15 +65,40 @@ function _resolveHack(name) {
     }
   }
 
-  if (_err && _err.code === 'MODULE_NOT_FOUND' && _known.indexOf(name) > -1) {
-    throw new Error(`'${name}' is not installed, please try: npm install --save-dev ${name}`);
+  if (_err && _err.code === 'MODULE_NOT_FOUND') {
+    let _args = '--save';
+
+    if (_knownDev.indexOf(name) !== -1) {
+      _args = '--save-dev';
+    }
+
+    if (_knownOptional.indexOf(name) !== -1) {
+      _args = '--save-optional';
+    }
+
+    throw new Error(`'${name}' is not installed, please try: npm install ${name} ${_args || ''}`);
   }
 
   throw _err;
 }
 
-module.exports = {
-  install(knownModules) {
+const self = module.exports = {
+  dependencies(knownModules) {
+    self.install(knownModules);
+
+    return self;
+  },
+  devDependencies(knownModules) {
+    self.install(knownModules, 'dev');
+
+    return self;
+  },
+  optionalDependencies(knownModules) {
+    self.install(knownModules, 'optional');
+
+    return self;
+  },
+  install(knownModules, typeOfDependency) {
     if (typeof knownModules === 'string') {
       knownModules = Array.prototype.slice.call(arguments);
     }
@@ -80,8 +107,18 @@ module.exports = {
       throw new Error(`Expect known modules as array, given '${knownModules}'`);
     }
 
+    let target = _known;
+
+    if (typeOfDependency === 'dev') {
+      target = _knownDev;
+    }
+
+    if (typeOfDependency === 'optional') {
+      target = _knownOptional;
+    }
+
     if (Array.isArray(knownModules)) {
-      Array.prototype.push.apply(_known, knownModules);
+      Array.prototype.push.apply(target, knownModules);
     }
 
     Module._resolveFilename = _resolveHack;
@@ -90,5 +127,7 @@ module.exports = {
     Module._resolveFilename = _resolveOriginal;
 
     _known.splice(0, _known.length);
+    _knownDev.splice(0, _knownDev.length);
+    _knownOptional.splice(0, _knownOptional.length);
   },
 };
