@@ -1,13 +1,13 @@
 language: node_js
 node_js:
-  - 4
   - 6
-  - 8
+  - 9
+  - 11
 before_script:
   - npm install -g noop
 script:
-  - 'npm run lint && npm run cover'
+  - 'npm run test:ci'
 after_script:
-  - 'npm run cover:up'
+  - 'npm run codecov'
 notifications:
   email: false
