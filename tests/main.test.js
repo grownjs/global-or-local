@@ -74,7 +74,7 @@ describe('global-or-local', () => {
         msg = e.message;
       }
 
-      expect(msg).toContain(`npm install ${__idk__} --save`);
+      expect(msg).to.contain(`npm install ${__idk__} --save`);
     });
 
     it('resolve locally otherwise', () => {
