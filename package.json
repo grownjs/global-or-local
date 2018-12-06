@@ -13,12 +13,13 @@
     "dev": "npm test -- --verbose --autoTest"
   },
   "devDependencies": {
-    "codecov": "^3.0.0",
-    "debug": "^3.1.0",
-    "eslint": "^3.5.0",
-    "eslint-config-airbnb-base": "^5.0.3",
-    "eslint-plugin-import": "^1.14.0",
-    "istanbul": ">=0.4.3",
-    "jasmine-node": "2.0.0-beta4"
+    "chai": "^4.2.0",
+    "codecov": "^3.1.0",
+    "debug": "^4.1.0",
+    "eslint": "^5.9.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "mocha": "^5.2.0",
+    "nyc": "^13.1.0"
   }
 }
