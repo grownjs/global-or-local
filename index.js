@@ -25,14 +25,24 @@ if (_paths.indexOf(nodeModules) === -1) {
 const _resolveOriginal = Module._resolveFilename;
 const _resolved = {};
 
-const _known = [];
-const _knownDev = [];
-const _knownOptional = [];
+let _map = {};
+let _known = [];
+let _knownDev = [];
+let _knownOptional = [];
 
 function _resolveHack(name) {
   let _err;
 
   try {
+    const keys = Object.keys(_map);
+
+    for (let i = 0; i < keys.length; i += 1) {
+      if (name.indexOf(keys[i]) === 0) {
+        arguments[0] = _map[keys[i]] + name.substr(keys[i].length);
+        break;
+      }
+    }
+
     /* eslint-disable prefer-spread */
     /* eslint-disable prefer-rest-params */
     return _resolveOriginal.apply(null, arguments);
@@ -122,12 +132,23 @@ const self = module.exports = {
     }
 
     Module._resolveFilename = _resolveHack;
+
+    return self;
   },
   uninstall() {
     Module._resolveFilename = _resolveOriginal;
 
-    _known.splice(0, _known.length);
-    _knownDev.splice(0, _knownDev.length);
-    _knownOptional.splice(0, _knownOptional.length);
+    _map = {};
+
+    _known = [];
+    _knownDev = [];
+    _knownOptional = [];
+
+    return self;
+  },
+  bind(prefix, baseDir) {
+    _map[prefix] = baseDir;
+
+    return self;
   },
 };

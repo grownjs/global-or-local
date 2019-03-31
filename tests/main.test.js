@@ -1,4 +1,5 @@
 const { expect } = require('chai');
+const path = require('path');
 const resolver = require('..');
 
 function findNoop() {
@@ -79,6 +80,13 @@ describe('global-or-local', () => {
 
     it('resolve locally otherwise', () => {
       expect(setupESLint).not.to.throw();
+    });
+  });
+
+  describe('#bind', () => {
+    it('will resolved bound routes if any matches', () => {
+      resolver.install().bind('foo', __dirname);
+      expect(path.basename(require.resolve('foo/../package'))).to.eql('package.json');
     });
   });
 });
