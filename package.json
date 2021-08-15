@@ -5,6 +5,9 @@
   "main": "index.js",
   "author": "Alvaro Cabrera <pateketrueke@gmail.com>",
   "license": "MIT",
+  "files": [
+    "index.js"
+  ],
   "scripts": {
     "dev": "npm test -- -w",
     "lint": "eslint index.js tests",
