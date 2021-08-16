@@ -31,8 +31,11 @@ let _knownDev = [];
 let _knownOptional = [];
 
 function _resolveHack(name) {
-  let _err;
+  if (name.charAt() === '/' || name.charAt() === '.') {
+    return _resolveOriginal.apply(null, arguments);
+  }
 
+  let _err;
   try {
     const keys = Object.keys(_map);
 
@@ -48,11 +51,6 @@ function _resolveHack(name) {
     return _resolveOriginal.apply(null, arguments);
   } catch (e) {
     _err = e;
-
-    // avoid relative files
-    if (name.charAt('.') === 0 || name.indexOf('/') > -1) {
-      throw e;
-    }
   }
 
   if (_resolved[name]) {
