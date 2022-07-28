@@ -58,7 +58,14 @@ function _resolveHack(name) {
   }
 
   for (let i = 0, c = _paths.length; i < c; i += 1) {
-    const fixedDir = path.join(_paths[i], name);
+    let fixedDir = path.join(_paths[i], name);
+
+    // this would work under asdf installations
+    const npmLibDir = fixedDir.replace('lib/node', '.npm/lib');
+
+    if (fs.existsSync(npmLibDir)) {
+      fixedDir = npmLibDir;
+    }
 
     if (fs.existsSync(fixedDir)) {
       debug(fixedDir);
