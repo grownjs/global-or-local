@@ -11,6 +11,6 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - run: npm i -g noop
-      - run: npm ci
+      - run: npm i
       - run: npm test
       - run: npm run codecov
