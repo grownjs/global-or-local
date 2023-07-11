@@ -71,8 +71,7 @@ function _resolveHack(name) {
       debug(fixedDir);
 
       /* eslint-disable prefer-rest-params */
-      const file = _resolveOriginal.apply(null,
-        [fixedDir].concat(Array.prototype.slice.call(arguments, 1)));
+      const file = _resolveOriginal.apply(null, [fixedDir].concat(Array.prototype.slice.call(arguments, 1)));
 
       _resolved[name] = file;
 
