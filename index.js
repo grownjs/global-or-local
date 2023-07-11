@@ -6,7 +6,7 @@ const fs = require('fs');
 
 const _paths = [];
 
-const Module = module.constructor;
+const Module = require('module');
 
 Module.globalPaths.forEach(_path => {
   if (_path.indexOf('node_') === -1) {
